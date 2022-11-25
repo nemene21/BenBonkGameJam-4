@@ -42,11 +42,13 @@ texture = ExtResource( 3 )
 [node name="SpritePivot" type="Node2D" parent="."]
 
 [node name="icon" type="Sprite" parent="SpritePivot"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0.156738, -11.2848 )
 scale = Vector2( 0.255065, 0.35439 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -3 )
 rotation = 1.5708
 shape = SubResource( 4 )
