@@ -1,6 +1,5 @@
 extends Node
 
-
 var particleSystems = {}
 
 const KillTimer = preload("res://addons/framework/usefulNodes/KillTimer.tscn")
@@ -29,3 +28,7 @@ func spawn_particles(system, pos = Vector2(), rot = 0, lifetime = 5):
 	particleNode.add_child(timer)
 	
 	target.add_child(particleNode)
+
+func _ready():
+	
+	add_particlesystem("basicBulletDie", "res://bulletDie.tscn")

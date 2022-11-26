@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://basic_enemy.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -12,6 +12,9 @@ height = 8.74364
 radius = 1.77495
 height = 9.66547
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8.625, 12.375 )
+
 [node name="basic_enemy" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -24,6 +27,8 @@ scale = Vector2( 0.225022, 0.345606 )
 texture = ExtResource( 2 )
 
 [node name="SoftCollider" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SoftCollider"]
@@ -35,3 +40,11 @@ shape = SubResource( 1 )
 position = Vector2( 0, -1.80945 )
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="hurtbox" type="Area2D" parent="." groups=[
+"enemy_hurtbox",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2( 0, -11 )
+shape = SubResource( 3 )

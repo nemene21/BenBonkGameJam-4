@@ -49,4 +49,4 @@ func _process(delta):
 	
 	var mouse_position = get_local_mouse_position() * 0.25
 	
-	$Camera.offset = lerp($Camera.offset, mouse_position, delta * 12)
+	$Camera.position = lerp($Camera.position, mouse_position, delta * 12)

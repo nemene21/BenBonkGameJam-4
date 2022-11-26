@@ -29,9 +29,9 @@ tracks/1/keys = {
 
 [node name="pistol" type="Node2D"]
 script = ExtResource( 2 )
-bullets_ps = 10
-bullet_lifetime = 0.2
-automatic = true
+bullets_ps = 5
+speed = 300
+bullet_lifetime = 0.5
 
 [node name="pistol" type="Sprite" parent="."]
 position = Vector2( 9, 0 )

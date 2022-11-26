@@ -17,9 +17,6 @@ static func shoot(scene, bullet_name, pos, dir, speed, damage, knockback, lifeti
 	bullet.knockback = knockback
 	bullet.global_position = pos
 	
-	var timer = ParticleManager.KillTimer.instance()
-	timer.wait_time = lifetime
-	
-	bullet.add_child(timer)
+	bullet.lifetime = lifetime
 	
 	scene.add_child(bullet)

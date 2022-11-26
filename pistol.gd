@@ -6,30 +6,31 @@ export var knockback = 100
 export var speed = 500
 export var bullet_lifetime = 0.1
 
+export var spread = 8
+
 export(bool) var automatic = false
 
 var reloaded = false
 
 func _ready():
 	
-	$reload_timer.set_wait_time(1 / bullets_ps)
+	$reload_timer.set_wait_time(1.0 / bullets_ps)
 	$reload_timer.start()
-	
-	print(1 / bullets_ps)
 
 func _process(delta):
 	
-	$reload_timer.set_wait_time(1 / bullets_ps)
-	print($reload_timer.wait_time)
-	
 	if ((Input.is_action_just_pressed("shoot") and !automatic) or (Input.is_action_pressed("shoot") and automatic)) and reloaded:
+		
+		var direction = (get_global_mouse_position() - get_parent().global_position).angle()
+		
+		get_parent().get_node("Camera").shake(4, 1, 0.15, 180 - rad2deg(direction))
 		
 		BulletSpawner.shoot(
 			
 			get_parent().get_parent(),
 			"basic",
 			$pistol/barrel.global_position,
-			(get_global_mouse_position() - get_parent().global_position).angle(),
+			direction + deg2rad(rand_range(-spread, spread)),
 			speed,
 			damage,
 			knockback,
