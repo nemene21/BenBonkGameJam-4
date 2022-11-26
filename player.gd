@@ -27,13 +27,23 @@ func _process(delta):
 	
 	move_and_slide(vel)
 	
+	Globals.player_pos = global_position
+	
 	# Animation
 	
 	anim_timer += delta
 	
 	$Particles2D.emitting = input.length() > 0
 	
-	$SpritePivot.rotation_degrees = sin(anim_timer * 10) * 8 * vel.length() / speed
+	$SpritePivot/Sprite.flip_h = get_local_mouse_position().x < 0
+	
+	if vel.length() > speed * 0.25:
+		
+		$AnimationPlayer.play("walk")
+		
+	else:
+		
+		$AnimationPlayer.play("idle")
 	
 	# Camera movement
 	

@@ -1,5 +1,7 @@
 extends Node
 
+var player_pos = Vector2()
+
 func save_json(path : String, data : Dictionary):
 	
 	var file = File.new()
