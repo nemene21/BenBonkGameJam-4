@@ -28,7 +28,9 @@ func _process(delta):
 			
 			queue_free()
 			
-			ParticleManager.spawn_particles("textParticle", global_position + Vector2(0, -8))
+			print(Globals.player_pos.y)
+			
+			ParticleManager.spawn_particles("textParticle", Globals.player_pos)
 		
 		return
 	

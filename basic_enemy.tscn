@@ -1,21 +1,27 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://basic_enemy.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://images/radioactivebat.png" type="Texture" id=2]
 [ext_resource path="res://SoftCollider.gd" type="Script" id=3]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.43893
+height = 8.74364
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 1.77495
+height = 9.66547
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8.65892, 8.64994 )
+
+[sub_resource type="Shader" id=5]
+resource_local_to_scene = true
 code = "shader_type canvas_item;
 
+uniform float flash : hint_range(0.0, 1.0);
+
 uniform vec4 color : hint_color;
-
-vec4 lerp4(vec4 a, vec4 b, vec4 c) {
-	
-	return a + (a - b) * c;
-	
-}
-
-uniform float flash = 0.0;
 
 void fragment() {
 	
@@ -26,34 +32,33 @@ void fragment() {
 }"
 custom_defines = ""
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/color = Color( 0.886275, 0.796078, 0.364706, 1 )
+shader = SubResource( 5 )
 shader_param/flash = 0.0
+shader_param/color = Color( 0.886275, 0.796078, 0.380392, 1 )
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 2.43893
-height = 8.74364
-
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 1.77495
-height = 9.66547
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 8.625, 12.375 )
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [node name="basic_enemy" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 2 )
-position = Vector2( 0, -9.53674e-07 )
-scale = Vector2( 0.225022, 0.345606 )
-texture = ExtResource( 2 )
-offset = Vector2( 0, -32 )
 
 [node name="SoftCollider" type="Area2D" parent="."]
 visible = false
@@ -64,23 +69,34 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SoftCollider"]
 position = Vector2( 0, -1.80945 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, -1.80945 )
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="hurtbox" type="Area2D" parent="." groups=[
 "enemy_hurtbox",
 ]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2( 0, -11 )
-shape = SubResource( 5 )
+visible = false
+position = Vector2( 0, -11.8909 )
+shape = SubResource( 3 )
 
 [node name="Flash" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 6 )
+position = Vector2( 0, -8 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -4 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 4 )
 [connection signal="timeout" from="Flash" to="." method="_on_Flash_timeout"]

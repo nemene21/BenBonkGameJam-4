@@ -8,7 +8,7 @@ var hp = 50
 
 func _process(delta):
 	
-	if (global_position - Globals.player_pos).length() > 400:
+	if (global_position - Globals.player_pos).length() > 200:
 		
 		return
 	
@@ -19,6 +19,8 @@ func _process(delta):
 	vel = lerp(vel, global_position.direction_to(Globals.player_pos).normalized() * 80, delta * 10)
 	
 	move_and_slide(vel + knockback)
+	
+	$Sprite.flip_h = vel.x < 0
 
 func damage(dmg, dir, kb):
 	
