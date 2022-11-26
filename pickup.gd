@@ -4,6 +4,10 @@ var picked_up = false
 
 var speed = 0
 
+func _ready():
+	
+	frame = rand_range(0, 2)
+
 func _process(delta):
 	
 	if picked_up:

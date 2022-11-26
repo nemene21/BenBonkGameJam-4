@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
-[ext_resource path="res://images/Robot_Walk.png" type="Texture" id=2]
+[ext_resource path="res://images/Robot_sheet.png" type="Texture" id=2]
 [ext_resource path="res://images/particle.png" type="Texture" id=3]
 [ext_resource path="res://addons/framework/usefulNodes/ShakableCamera2D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://pistol.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 20.1091, 0, 0, Vector2( 0.151899, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -39,10 +40,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SpritePivot:rotation_degrees")
@@ -56,57 +57,35 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("SpritePivot/Sprite:scale:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.25, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 0.8 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("SpritePivot/Sprite:scale:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0.75, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 0.8 )
-}
 
 [sub_resource type="Animation" id=6]
 resource_name = "walk"
 length = 0.8
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("SpritePivot/Sprite:frame")
+tracks/0/path = NodePath("SpritePivot:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 2, 1, 0 ]
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -3.0, 3.0, -3.0, 3.0, -3.0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpritePivot:rotation_degrees")
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("SpritePivot/Sprite:scale:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ -5.0, 5.0, -5.0, 5.0, -5.0 ]
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("SpritePivot/Sprite:scale:x")
+tracks/2/path = NodePath("SpritePivot/Sprite:scale:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -116,14 +95,14 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("SpritePivot/Sprite:scale:y")
+tracks/3/path = NodePath("SpritePivot/Sprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 6, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 )
 }
 
 [node name="player" type="KinematicBody2D"]
@@ -143,6 +122,7 @@ texture = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="SpritePivot"]
 texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
+vframes = 2
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -161,3 +141,6 @@ smoothing_speed = 8.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 5 )
 anims/walk = SubResource( 6 )
+
+[node name="pistol" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -5 )

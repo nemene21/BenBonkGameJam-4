@@ -40,7 +40,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "pickup"
-length = 0.4
+length = 0.3
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:scale:x")
 tracks/0/interp = 1
@@ -49,7 +49,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"times": PoolRealArray( 0, 0.3 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath(".:scale:y")
@@ -59,12 +59,13 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1e-05, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4 )
+"times": PoolRealArray( 0, 0.3 )
 }
 
 [node name="pickup" type="Sprite"]
 self_modulate = Color( 2, 2, 2, 1 )
 texture = ExtResource( 1 )
+hframes = 3
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
