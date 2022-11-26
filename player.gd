@@ -14,6 +14,10 @@ func _ready():
 
 func _process(delta):
 	
+	# Score Label
+	
+	$UI/Label.text = str(Globals.score)
+	
 	# Movement
 	
 	var input = Vector2(
@@ -44,6 +48,20 @@ func _process(delta):
 	else:
 		
 		$AnimationPlayer.play("idle")
+		
+	# Middle arrow
+	
+	$midArrow.position = - global_position + Vector2(0, -5)
+	
+	$midArrow.modulate.a = lerp($midArrow.modulate.a, int($midArrow.position.length() > 125), delta * 15)
+	
+	var arrow_out = 50
+	
+	if $midArrow.position.length() > arrow_out:
+		
+		$midArrow.position = $midArrow.position.normalized() * arrow_out
+	
+	$midArrow.look_at(Vector2())
 	
 	# Camera movement
 	

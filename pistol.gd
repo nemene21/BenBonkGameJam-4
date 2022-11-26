@@ -38,6 +38,8 @@ func _process(delta):
 			
 		)
 		
+		ParticleManager.spawn_particles("muzzleFlash", $pistol/barrel.global_position, rad2deg(direction))
+		
 		$AnimationPlayer.play("shoot")
 		
 		reloaded = false

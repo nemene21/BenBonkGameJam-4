@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Robot_Walk.png-b9cd4afe9ff548b6d9956b394563ca81.stex"
+path="res://.import/sidewaysshelf.png-b04938c8458ea2b8c8c3546812555be6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/Robot_Walk.png"
-dest_files=[ "res://.import/Robot_Walk.png-b9cd4afe9ff548b6d9956b394563ca81.stex" ]
+source_file="res://images/decoration/sidewaysshelf.png"
+dest_files=[ "res://.import/sidewaysshelf.png-b04938c8458ea2b8c8c3546812555be6.stex" ]
 
 [params]
 

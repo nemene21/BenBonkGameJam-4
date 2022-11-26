@@ -24,7 +24,11 @@ func _process(delta):
 		
 		if Globals.player_pos.distance_to(global_position) < 8:
 			
+			Globals.score += 1
+			
 			queue_free()
+			
+			ParticleManager.spawn_particles("textParticle", global_position + Vector2(0, -8))
 		
 		return
 	

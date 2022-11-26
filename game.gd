@@ -9,6 +9,6 @@ func spawn_drops(pos, points):
 		var pickup = radium.instance()
 		
 		pickup.global_position = pos
-		pickup.vel = Vector2(rand_range(-50, 50), rand_range(-50, 50))
+		pickup.vel = Vector2(rand_range(-80, 80), rand_range(-80, 80))
 		
 		add_child(pickup)

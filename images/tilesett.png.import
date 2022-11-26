@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/robot_idle.png-155a58c8640cd62e183251e1c69e8034.stex"
+path="res://.import/tilesett.png-508a1fe3f9312274ca46f7b63e93eb31.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/robot_idle.png"
-dest_files=[ "res://.import/robot_idle.png-155a58c8640cd62e183251e1c69e8034.stex" ]
+source_file="res://images/tilesett.png"
+dest_files=[ "res://.import/tilesett.png-508a1fe3f9312274ca46f7b63e93eb31.stex" ]
 
 [params]
 

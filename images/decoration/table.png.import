@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilesetben.png-69ea3fcfabdd2b27c51ad477c1274c29.stex"
+path="res://.import/table.png-34961b87034524320127cd0da0de4e3c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/tilesetben.png"
-dest_files=[ "res://.import/tilesetben.png-69ea3fcfabdd2b27c51ad477c1274c29.stex" ]
+source_file="res://images/decoration/table.png"
+dest_files=[ "res://.import/table.png-34961b87034524320127cd0da0de4e3c.stex" ]
 
 [params]
 

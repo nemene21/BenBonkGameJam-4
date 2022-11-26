@@ -20,7 +20,7 @@ func spawn_particles(system, pos = Vector2(), rot = 0, lifetime = 5):
 	particleNode.global_position = pos
 	particleNode.rotation_degrees = rot
 	
-	particleNode.emitting = true
+	if particleNode is Particles2D: particleNode.emitting = true
 	
 	var timer = KillTimer.instance()
 	timer.wait_time = lifetime
@@ -32,3 +32,6 @@ func spawn_particles(system, pos = Vector2(), rot = 0, lifetime = 5):
 func _ready():
 	
 	add_particlesystem("basicBulletDie", "res://bulletDie.tscn")
+	add_particlesystem("muzzleFlash", "res://muzzleFlash.tscn")
+	
+	add_particlesystem("textParticle", "res://textParticle.tscn")
