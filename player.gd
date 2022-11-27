@@ -16,7 +16,7 @@ func _process(delta):
 	
 	# Score Label
 	
-	$UI/Label.text = str(Globals.score)
+	$UI/Score.text = str(Globals.score)
 	
 	# Movement
 	
@@ -68,3 +68,5 @@ func _process(delta):
 	var mouse_position = get_local_mouse_position() * 0.25
 	
 	$Camera.position = lerp($Camera.position, mouse_position, delta * 12)
+	
+	Globals.player = self

@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://images/tilesett.png" type="Texture" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://slime.tscn" type="PackedScene" id=3]
 [ext_resource path="res://basic_enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://generator.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game.gd" type="Script" id=6]
@@ -269,3 +270,6 @@ position = Vector2( 289.392, 348.401 )
 
 [node name="basic_enemy6" parent="." instance=ExtResource( 4 )]
 position = Vector2( 287.147, 299.013 )
+
+[node name="slime" parent="." instance=ExtResource( 3 )]
+position = Vector2( -64, -8 )

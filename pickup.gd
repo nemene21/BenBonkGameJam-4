@@ -28,7 +28,7 @@ func _process(delta):
 			
 			queue_free()
 			
-			print(Globals.player_pos.y)
+			Globals.player.get_node("UI/ScoreAnimationPlayer").play("pickup")
 			
 			ParticleManager.spawn_particles("textParticle", Globals.player_pos + Vector2(rand_range(-12, 12), rand_range(-12, 12)))
 		

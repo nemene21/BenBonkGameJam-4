@@ -3,6 +3,8 @@ extends Node
 var player_pos = Vector2()
 var score = 0
 
+var player = null
+
 func save_json(path : String, data : Dictionary):
 	
 	var file = File.new()

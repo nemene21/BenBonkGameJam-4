@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://images/slime.png" type="Texture" id=1]
+[ext_resource path="res://SoftCollider.tscn" type="PackedScene" id=2]
+[ext_resource path="res://slime.gd" type="Script" id=3]
+
+[sub_resource type="Shader" id=5]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float flash : hint_range(0.0, 1.0);
+
+uniform vec4 color : hint_color;
+
+void fragment() {
+	
+	vec4 pixel = texture(TEXTURE, UV);
+	
+	COLOR = pixel * (1.0 - flash) + vec4(color.rgb, pixel.a) * flash;
+	
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/flash = 0.0
+shader_param/color = Color( 0.886275, 0.796078, 0.380392, 1 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.76088, 5.67608 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 1.8125
+height = 7.875
+
+[node name="slime" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 6 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -8 )
+hframes = 8
+
+[node name="SoftCollider" parent="." instance=ExtResource( 2 )]
+
+[node name="Area2D" type="Area2D" parent="." groups=[
+"enemy_hurtbox",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -4 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Flash" type="Timer" parent="."]
+wait_time = 0.2
+[connection signal="timeout" from="Flash" to="." method="_on_Flash_timeout"]
