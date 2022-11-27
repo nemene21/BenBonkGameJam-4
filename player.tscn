@@ -157,6 +157,7 @@ position = Vector2( 0, -5 )
 [node name="midArrow" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 48.9354, -6.89374 )
+z_index = 3
 texture = ExtResource( 6 )
 
 [node name="UI" type="CanvasLayer" parent="."]

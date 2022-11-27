@@ -30,7 +30,7 @@ func _process(delta):
 			
 			print(Globals.player_pos.y)
 			
-			ParticleManager.spawn_particles("textParticle", Globals.player_pos)
+			ParticleManager.spawn_particles("textParticle", Globals.player_pos + Vector2(rand_range(-12, 12), rand_range(-12, 12)))
 		
 		return
 	
