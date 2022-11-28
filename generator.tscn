@@ -1,25 +1,26 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://images/generator.png" type="Texture" id=1]
 [ext_resource path="res://generator.gd" type="Script" id=2]
 [ext_resource path="res://images/particle.png" type="Texture" id=3]
+[ext_resource path="res://addons/framework/usefulNodes/ShakableCamera2D.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 8 )
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=18]
 colors = PoolColorArray( 0.392157, 0.227451, 0, 1, 0.392157, 0.227451, 0, 0 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 18 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.208861, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0181818 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=6]
 emission_shape = 2
 emission_box_extents = Vector3( 24, 16, 1 )
 flag_disable_z = true
@@ -34,13 +35,215 @@ angle = 720.0
 angle_random = 1.0
 scale = 3.0
 scale_random = 1.0
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 4 )
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "explode"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ExplodeRay:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 720.0, 1440.0 ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ExplodeRay:material:shader_param/thickness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 4.5, 5 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ExplodeSmoke:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Explosion:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("CanvasLayer/EndFlash:color:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 4, 4.8 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("generator:scale:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.25, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.25, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.25, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.25, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.25, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("generator:scale:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0.75, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.75, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.75, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.75, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.75, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 )
+}
+
+[sub_resource type="GradientTexture" id=19]
+gradient = SubResource( 18 )
+
+[sub_resource type="Curve" id=15]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0949367, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.556962, 1 ), -0.0807956, -0.0807956, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 15 )
+
+[sub_resource type="ParticlesMaterial" id=20]
+emission_shape = 1
+emission_sphere_radius = 8.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 200.0
+angular_velocity = 250.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+scale = 6.0
+scale_random = 1.0
+scale_curve = SubResource( 16 )
+color_ramp = SubResource( 19 )
+
+[sub_resource type="Gradient" id=22]
+colors = PoolColorArray( 0.886275, 0.796078, 0.380392, 1, 0.392157, 0.227451, 0, 0 )
+
+[sub_resource type="GradientTexture" id=23]
+gradient = SubResource( 22 )
+
+[sub_resource type="ParticlesMaterial" id=21]
+emission_shape = 1
+emission_sphere_radius = 8.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 35.0
+angular_velocity = 250.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+scale = 6.0
+scale_random = 1.0
+scale_curve = SubResource( 16 )
+color_ramp = SubResource( 23 )
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+uniform sampler2D curve;
+uniform vec4 color : hint_color;
+const vec2 center = vec2(.5, .5);
+
+uniform int rays;
+
+const float HALF_PI = 1.57079632679;
+const float     PI2 = 6.28318530718;
+const float      PI = 3.14159265359;
+
+uniform float thickness : hint_range(0.0, 0.5);
+
+float atan2(vec2 vector) {
+	
+	return atan( vector.y / vector.x ) + PI * float(vector.x < 0.0);
+	
+}
+
+void fragment() {
+	
+	vec2 difference = UV - center;
+	
+	float dist  = clamp(length(difference) * 2.0, 0.0, 1.0);
+	float angle = atan2(difference);
+	
+	int mask = 0;
+	
+	float single_angle = PI2 / float(rays);
+	
+	for (float i = 0.0; i <= float(rays + 5); i++) {
+		
+		mask += int(abs(angle - (i * single_angle - PI)) < thickness);
+		
+	}
+	
+	// mask = min(mask, 1);
+	
+	COLOR = vec4(color.rgb, texture(curve, vec2(dist, 0.0)).r * color.a) * float(mask);
+	
+}"
+custom_defines = ""
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+resource_local_to_scene = true
+width = 32
+curve = SubResource( 11 )
+
+[sub_resource type="ShaderMaterial" id=12]
+resource_local_to_scene = true
+shader = SubResource( 8 )
+shader_param/color = Color( 0.886275, 0.796078, 0.380392, 1 )
+shader_param/rays = 3
+shader_param/thickness = 0.0
+shader_param/curve = SubResource( 10 )
+
+[sub_resource type="OpenSimplexNoise" id=13]
+period = 10.9
+
+[sub_resource type="NoiseTexture" id=14]
+width = 300
+height = 300
+noise = SubResource( 13 )
 
 [node name="generator" type="StaticBody2D"]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource( 2 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 4 )]
 
 [node name="generator" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -57,5 +260,49 @@ shape = SubResource( 1 )
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 0, -21 )
 amount = 16
-process_material = SubResource( 2 )
+process_material = SubResource( 6 )
 texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/explode = SubResource( 7 )
+
+[node name="ExplodeSmoke" type="Particles2D" parent="."]
+position = Vector2( 0, -15 )
+emitting = false
+amount = 16
+randomness = 1.0
+process_material = SubResource( 20 )
+texture = ExtResource( 3 )
+
+[node name="Explosion" type="Particles2D" parent="."]
+position = Vector2( 0, -15 )
+emitting = false
+amount = 16
+explosiveness = 0.9
+randomness = 1.0
+process_material = SubResource( 21 )
+texture = ExtResource( 3 )
+
+[node name="ExplodeRay" type="Sprite" parent="."]
+material = SubResource( 12 )
+position = Vector2( 0, -15 )
+rotation = 25.1327
+z_index = 1
+texture = SubResource( 14 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationStarter" type="Timer" parent="."]
+wait_time = 1.25
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EndFlash" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.886275, 0.796078, 0.380392, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="timeout" from="AnimationStarter" to="." method="_on_AnimationStarter_timeout"]
