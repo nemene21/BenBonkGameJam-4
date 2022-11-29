@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-var stress = 50
+var stress = 0
 var broken = false
 
 func _process(delta):

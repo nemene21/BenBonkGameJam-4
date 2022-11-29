@@ -5,6 +5,8 @@ var score = 0
 
 var player = null
 
+var player_weapon_reload_anim = 0
+
 func save_json(path : String, data : Dictionary):
 	
 	var file = File.new()

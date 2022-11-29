@@ -53,7 +53,7 @@ func _process(delta):
 	
 	$midArrow.position = - global_position + Vector2(0, -5)
 	
-	$midArrow.modulate.a = lerp($midArrow.modulate.a, int($midArrow.position.length() > 125), delta * 15)
+	$midArrow.modulate.a = lerp($midArrow.modulate.a, int($midArrow.position.length() > 125) * 0.4, delta * 15)
 	
 	var arrow_out = 50
 	
@@ -62,6 +62,7 @@ func _process(delta):
 		$midArrow.position = $midArrow.position.normalized() * arrow_out
 	
 	$midArrow.look_at(Vector2())
+	$midArrow.rotation_degrees += 90
 	
 	# Camera movement
 	
@@ -70,3 +71,7 @@ func _process(delta):
 	$Camera.position = lerp($Camera.position, mouse_position, delta * 12)
 	
 	Globals.player = self
+
+func hurt():
+	
+	print("hurt :(")

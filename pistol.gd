@@ -21,7 +21,7 @@ func _process(delta):
 	
 	if ((Input.is_action_just_pressed("shoot") and !automatic) or (Input.is_action_pressed("shoot") and automatic)) and reloaded:
 		
-		var direction = (get_global_mouse_position() - get_parent().global_position).angle()
+		var direction = (get_global_mouse_position() - global_position).angle()
 		
 		get_parent().get_node("Camera").shake(4, 1, 0.15, 180 - rad2deg(direction))
 		
@@ -45,6 +45,9 @@ func _process(delta):
 		reloaded = false
 		
 		$reload_timer.start()
+		
+		$Tween.interpolate_property(Globals, "player_weapon_reload_anim", 1, 0, $reload_timer.wait_time, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		$Tween.start()
 	
 	rotation = (get_global_mouse_position() - get_parent().global_position).angle()
 	
